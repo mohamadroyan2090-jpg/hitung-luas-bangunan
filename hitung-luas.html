@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Tugas 1 - JavaScript Luas Bangun Datar</title>
+    <style>
+        /* ====== Rapi di Tengah ====== */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 350px;
+        }
+
+        input, select, button {
+            margin: 8px 0;
+            padding: 6px 10px;
+            width: 80%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        p#hasil {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hitung Luas Bangun Datar</h1>
+
+        <!-- Pilihan Bangun Datar -->
+        Pilih Bangun Datar: 
+        <select id="bangun" onchange="tampilkanInput()">
+            <option value="">--Pilih--</option>
+            <option value="persegiPanjang">Persegi Panjang</option>
+            <option value="bujurSangkar">Bujur Sangkar</option>
+            <option value="segitiga">Segitiga</option>
+        </select>
+
+        <!-- Tempat input form muncul -->
+        <div id="formInput" style="margin-top:20px;"></div>
+
+        <!-- Tempat hasil muncul -->
+        <p id="hasil"></p>
+    </div>
+
+    <script>
+      
+        // Fungsi Menghitung Luas Bangun Datar //
+
+        /**
+         * Menghitung luas persegi panjang
+         * @param {number} panjang - Panjang persegi panjang (cm)
+         * @param {number} lebar - Lebar persegi panjang (cm)
+         * @returns {number} - Luas persegi panjang (cm²)
+         */
+        function luasPersegiPanjang(panjang, lebar) {
+            return panjang * lebar;
+        }
+
+        /**
+         * Menghitung luas bujur sangkar
+         * @param {number} sisi - Panjang sisi bujur sangkar (cm)
+         * @returns {number} - Luas bujur sangkar (cm²)
+         */
+        function luasBujurSangkar(sisi) {
+            return sisi * sisi;
+        }
+
+        /**
+         * Menghitung luas segitiga
+         * @param {number} alas - Panjang alas segitiga (cm)
+         * @param {number} tinggi - Tinggi segitiga (cm)
+         * @returns {number} - Luas segitiga (cm²)
+         */
+        function luasSegitiga(alas, tinggi) {
+            return 0.5 * alas * tinggi;
+        }
+
+        // Menampilkan Input Sesuai Pilihan //
+
+        /**
+         * Menampilkan form input sesuai bangun datar yang dipilih
+         */
+        function tampilkanInput() {
+            const bangun = document.getElementById("bangun").value;
+            const formDiv = document.getElementById("formInput");
+            formDiv.innerHTML = ""; // reset form
+            document.getElementById("hasil").innerText = ""; // reset hasil
+
+            if (bangun === "persegiPanjang") {
+                // Form input untuk persegi panjang
+                formDiv.innerHTML = `
+                    Panjang: <input type="number" id="panjang" placeholder="Masukkan panjang"> cm<br>
+                    Lebar: <input type="number" id="lebar" placeholder="Masukkan lebar"> cm<br>
+                    <button onclick="hitungLuas('persegiPanjang')">Hitung Luas</button>
+                `;
+            } else if (bangun === "bujurSangkar") {
+                // Form input untuk bujur sangkar
+                formDiv.innerHTML = `
+                    Sisi: <input type="number" id="sisi" placeholder="Masukkan sisi"> cm<br>
+                    <button onclick="hitungLuas('bujurSangkar')">Hitung Luas</button>
+                `;
+            } else if (bangun === "segitiga") {
+                // Form input untuk segitiga
+                formDiv.innerHTML = `
+                    Alas: <input type="number" id="alas" placeholder="Masukkan alas"> cm<br>
+                    Tinggi: <input type="number" id="tinggi" placeholder="Masukkan tinggi"> cm<br>
+                    <button onclick="hitungLuas('segitiga')">Hitung Luas</button>
+                `;
+            }
+        }
+
+        // Fungsi Hitung Luas dan Tampilkan Hasil //
+
+        /**
+         * Mengambil nilai input dan menghitung luas sesuai bangun datar
+         * @param {string} bangun - Nama bangun datar ("persegiPanjang", "bujurSangkar", "segitiga")
+         */
+        function hitungLuas(bangun) {
+            let hasil = 0;
+
+            if (bangun === "persegiPanjang") {
+                let p = parseFloat(document.getElementById("panjang").value);
+                let l = parseFloat(document.getElementById("lebar").value);
+                hasil = luasPersegiPanjang(p, l);
+            } else if (bangun === "bujurSangkar") {
+                let s = parseFloat(document.getElementById("sisi").value);
+                hasil = luasBujurSangkar(s);
+            } else if (bangun === "segitiga") {
+                let a = parseFloat(document.getElementById("alas").value);
+                let t = parseFloat(document.getElementById("tinggi").value);
+                hasil = luasSegitiga(a, t);
+            }
+
+            // Menampilkan hasil ke halaman
+            document.getElementById("hasil").innerText = "Luas " + bangun + " = " + hasil + " cm²";
+        }
+    </script>
+</body>
+</html>
