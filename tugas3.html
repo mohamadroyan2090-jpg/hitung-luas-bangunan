@@ -5,11 +5,7 @@
 </head>
 <body>
 
-<h2>Manajemen Produk Toko</h2>
-<div id="output"></div>
-
 <script>
-let output = document.getElementById("output");
 
 // Array produk
 let produkToko = [
@@ -20,25 +16,22 @@ let produkToko = [
 
 // Fungsi menampilkan produk
 function tampilkanProduk() {
-    let html = "<h3>Daftar Produk</h3>";
-    html += "<ul>";
+    console.log("Daftar Produk:");
     
     for (let i = 0; i < produkToko.length; i++) {
-        html += "<li>"
-            + "ID: " + produkToko[i].id +
+        console.log(
+            "ID: " + produkToko[i].id +
             " | Nama: " + produkToko[i].nama +
             " | Harga: " + produkToko[i].harga +
-            " | Stok: " + produkToko[i].stok +
-            "</li>";
+            " | Stok: " + produkToko[i].stok
+        );
     }
-    
-    html += "</ul>";
-    output.innerHTML = html;
 }
 
 // Fungsi tambah produk
 function tambahProduk(nama, harga, stok) {
     let idBaru = produkToko.length + 1;
+
     let produkBaru = {
         id: idBaru,
         nama: nama,
@@ -47,16 +40,22 @@ function tambahProduk(nama, harga, stok) {
     };
 
     produkToko.push(produkBaru);
+    console.log("Produk berhasil ditambahkan:", nama);
 }
 
 // Fungsi hapus produk
 function hapusProduk(id) {
     produkToko = produkToko.filter(produk => produk.id !== id);
+    console.log("Produk dengan ID " + id + " dihapus");
 }
 
 // Contoh penggunaan
+tampilkanProduk();
+
 tambahProduk("Monitor", 1500000, 4);
-hapusProduk(2); // hapus Mouse
+
+hapusProduk(2);
+
 tampilkanProduk();
 
 </script>
