@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sistem Manajemen Transportasi</title>
+</head>
+<body>
+
+<h2>Daftar Pelanggan Penyewa Kendaraan</h2>
+
+<div id="hasil"></div>
+
+<script>
+
+// Class Pelanggan
+class Pelanggan {
+
+    constructor(nama, nomorTelepon) {
+        this.nama = nama;
+        this.nomorTelepon = nomorTelepon;
+        this.kendaraanDisewa = null;
+    }
+
+    // Method mencatat penyewaan kendaraan
+    sewaKendaraan(kendaraan) {
+        this.kendaraanDisewa = kendaraan;
+    }
+
+}
+
+// Array untuk menyimpan pelanggan
+let daftarPelanggan = [];
+
+// Membuat objek pelanggan
+let pelanggan1 = new Pelanggan("Andi", "08123456789");
+let pelanggan2 = new Pelanggan("Budi", "08234567890");
+let pelanggan3 = new Pelanggan("Siti", "08345678901");
+
+// Mencatat transaksi penyewaan
+pelanggan1.sewaKendaraan("Mobil");
+pelanggan2.sewaKendaraan("Motor");
+pelanggan3.sewaKendaraan("Bus");
+
+// Memasukkan ke daftar pelanggan
+daftarPelanggan.push(pelanggan1);
+daftarPelanggan.push(pelanggan2);
+daftarPelanggan.push(pelanggan3);
+
+// Menampilkan daftar pelanggan
+let output = "";
+
+daftarPelanggan.forEach(function(p){
+    output += "Nama: " + p.nama + "<br>";
+    output += "No Telepon: " + p.nomorTelepon + "<br>";
+    output += "Kendaraan Disewa: " + p.kendaraanDisewa + "<br><br>";
+});
+
+document.getElementById("hasil").innerHTML = output;
+
+</script>
+
+</body>
+</html>
